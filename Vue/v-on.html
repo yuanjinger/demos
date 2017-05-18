@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+
+</head>
+<body>
+<div id="demo">
+	<!-- v-bind可用缩写：代替，v-on可用缩写@代替 -->
+	<span :costomId="id" v-on:click="clickHandle">{{message}}</span>
+		<input type="text" v-model="message">
+	</div>
+	<script>
+		let obj = {
+			message:"",
+			id:"123"
+		}
+		new Vue({
+		el: '#demo',//将该实例挂载到元素
+		data:obj,//指向model对象
+		methods:{
+			clickHandle:function(){
+				alert("click");
+			}
+		}
+	});
+	</script>
+	<!-- <div id="list">
+		<ul>
+			<li v-for="tab in tabs">
+				{{tab.text}}
+			</li>
+		</ul>
+	</div>
+	
+	<div id="example">
+	  	a={{ a }}, b={{ b }}
+	</div>
+	<script type="text/javascript" src="config.js"></script> -->
+</body>
+</html>

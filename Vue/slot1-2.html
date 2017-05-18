@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>自定义组件</h2>
+    <custom>
+      <div slot="one">替换第一个</div>
+      <div slot="three">替换第三个</div>
+      <div slot="two">替换第二个</div>
+      <!-- 批量替换插入 -->
+      <template slot="two">
+        <div>替换第二个</div>
+        <div>替换第二个</div>
+        <div>替换第二个</div>
+        <div>替换第二个</div>
+        <div>替换第二个</div>
+        <div>替换第二个</div>
+
+      </template>
+    </custom>
+  </div>
+  <script type="text/javascript">
+    //定制模板 div
+    Vue.component("custom",{
+      template:`
+        <div>
+          <slot name="one"><p>这是第一个提醒</p></slot>
+          <slot name="two"><p>这是第二个提醒</p></slot>
+          <slot name="three"><p>这是第三个提醒</p></slot>
+        </div>
+      `
+    })
+    new Vue({
+      el:"#app"
+    })
+  </script>
+</body>
+</html>

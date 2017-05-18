@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<!-- v-else用在v-if或v-else-if后表示else代码块-->
+	<div id="app">
+		<h1>hello,Vue.js</h1>
+		<h1 v-show="yes">YES</h1>
+		<h1 v-show="no">NO</h1>
+		<h1 v-show="age>=25">Age:{{age}}</h1>
+		<h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+		<h1 v-else>Sex: {{ sex }}</h1>
+	</div>
+	<script type="text/javascript">
+		var obj={
+				yes:true,
+				no:false,
+				age:28,
+				name: 'keepfool',
+                sex: 'Male'
+			}
+		var vm =new Vue({
+			el:'#app',
+			data:obj
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<!-- v-if用于插入删除元素 -->
+	<div id="app">
+		<h1>hello,Vue.js</h1>
+		<h1 v-if="yes">YES</h1>
+		<h1 v-if="no">NO</h1>
+		<h1 v-if="age>=25">Age:{{age}}</h1>
+		<h1 v-if="name.indexOf('jack')>=0">{{name}}</h1>
+	</div>
+	<script type="text/javascript">
+		var obj={
+				yes:true,
+				no:false,
+				age:28,
+				name:'keepfool'
+			}
+		var vm =new Vue({
+			el:'#app',
+			data:obj
+		});
+	</script>
+</body>
+</html>

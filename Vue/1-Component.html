@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style media="screen">
+    ul,li{
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+    .warp{
+      width: 300px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #ccc;
+    }
+    input{
+      border: none;
+      border-radius: 5px;
+      line-height: 30px;
+    }
+    input[type=button]{
+      display: inline-block;
+      width: 50px;
+      background: orange;
+    }
+    li{
+      line-height: 30px;
+      font-size: 20px;
+      text-align: left;
+      border-radius: 5px;
+    }
+    li:hover{
+      background: orange;
+    }
+  </style>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>自定义下拉框</h2>
+    <custom-select props></custom-select>
+  </div>
+  <script type="text/javascript">
+    //注册组件
+    Vue.component("custom-select",{
+      template:`
+      <section class="warp">
+        <div class="clearFix">
+          <input type="text" class="keyWord" value=""/>
+          <input type="button" value="GO"/>
+          <span></span>
+        </div>
+        <ul class="list">
+          <li>html+css</li>
+          <li>html5+css3</li>
+          <li>javascript</li>
+          <li>angular</li>
+          <li>react</li>
+          <li>jquery</li>
+        </ul>
+      </section>
+      `
+    })
+    new Vue({
+      el:"#app"
+    })
+  </script>
+</body>
+</html>
