@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script type="text/javascript">
+  function createPeople(name){
+    //原料
+    var obj = new Object();
+    //加工
+    obj.name=name;
+    obj.showName =function() {
+      alert(this.name);
+    }
+    //出厂
+    return obj;
+  }
+  var p1= createPeople("xiaoming");
+  p1.showName();
+  var p2=createPeople("xiaoqiang");
+  p2.showName();
+</script>
+<body>
+
+</body>
+</html>

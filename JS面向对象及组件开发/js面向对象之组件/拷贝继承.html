@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript">
+    // function people(name,sex){
+    //   this.name=name;
+    //   this.sex=sex;
+    // }
+    // people.prototype.showname=function(){
+    //   alert(this.name);
+    // }
+    // function student(name,sex,job){
+    //   people.call(this,name,sex);
+    //   this.job=job;
+    // }
+    // student.prototype = people.prototype;//对象赋给对象，就会出现对象的引用，如果子类原型添加一个方法，父类就会受影响
+    // var p1=new people('jack',32);
+    // var s1=new student('jenny',24,'student');
+    // console.log(p1);
+    // console.log(s1);
+    function people(name,sex){
+      this.name=name;
+      this.sex=sex;
+    }
+    people.prototype.showname=function(){
+      alert(this.name);
+    }
+    function student(name,sex,job){
+      people.call(this,name,sex);
+      this.job=job;
+    }
+
+    extend(student.prototype,people.prototype);//拷贝继承,实现方法的继承
+    student.prototype.showjob=function(){
+      alert();
+    }
+    function extend(obj1,obj2){
+      for (var attr in obj2) {
+        obj1[attr]=obj2[attr];
+      }
+    }
+    var p1=new people('jack',32);
+    var s1=new student('jenny',24,'student');
+
+    console.log(p1);
+    console.log(s1);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

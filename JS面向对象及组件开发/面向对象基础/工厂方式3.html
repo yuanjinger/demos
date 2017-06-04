@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script type="text/javascript">
+  /*
+  基本类型：赋值时只是值的复制
+  对象类型：赋值不仅是值的复制，还是引用的传递
+  */
+  function CreatePeople(name){
+    this.name=name;
+
+  }
+  CreatePeople.prototype.showName=function(){
+    alert(this.name);
+  }
+  var p1= new CreatePeople("xiaoming");
+  var p2=new CreatePeople("xiaoqiang");
+  alert(p1.showName==p2.showName);//false,showName方法没有共用，解决方式：原型
+  
+  var arr1=[1,2,3];
+  var arr2=[2,2,2];
+  Array.prototype.sum=function(){
+    var result=0;
+    for (var i = 0; i < this.length; i++) {
+      result+=this[i];
+    }
+    return result;
+  };
+  alert(arr1.sum());
+</script>
+<body>
+
+</body>
+</html>

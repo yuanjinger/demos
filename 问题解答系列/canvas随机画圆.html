@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    body{background: black;}
+    #canvas{
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500">
+
+  </canvas>
+  <script type="text/javascript">
+    window.onload = function(){
+      var oC = document.getElementById("canvas");
+      var oGC = oC.getContext('2d');
+      var iNum =0;
+      var setArr = [];
+    //  oGC.strokeRect(iNum,iNum,100,100);
+
+      setInterval(function(){
+        oGC.clearRect(0,0,oC.width,oC.height)//清除整个画布
+        //大小和透明度变化
+        for (var i = 0; i < setArr.length; i++) {
+          setArr[i].r++;
+          setArr[i].apha -= 0.008;
+          if (setArr[i].apha<=0) {
+            setArr.splice[i,1];
+          }
+          console.log("shuzi"+setArr.length);
+        }
+        //循环绘制图形
+        for (var i = 0; i < setArr.length; i++) {
+          oGC.beginPath();
+          oGC.fillStyle='rgba('+setArr[i].red+','+setArr[i].green+','+setArr[i].blue+','+setArr[i].apha+')';
+          oGC.moveTo(setArr[i].x,setArr[i].y);
+          oGC.arc(setArr[i].x,setArr[i].y,setArr[i].r,0,360*Math.PI/180,false);
+          oGC.closePath();
+          oGC.fill();
+        }
+      },1000/60);
+      setInterval(function () {
+        var x = Math.floor(Math.random()*oC.width);
+        var y = Math.floor(Math.random()*oC.height);
+        var r =10;
+        var red=Math.floor(Math.random()*255);
+        var green =Math.floor(Math.random()*255);
+        var blue =Math.floor(Math.random()*255);
+        var apha=1;
+        setArr.push({
+          x : x,
+          y : y,
+          r : r,
+          red:red,
+          green: green,
+          blue:blue,
+          apha:apha
+        });
+      },500)
+    }
+  </script>
+</body>
+</html>

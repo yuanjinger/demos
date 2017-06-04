@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS揭秘第E二章———背景与边框</title>
+</head>
+<body>
+<style type="text/css">
+  body{
+    background: url(index_01.jpg);
+    background-size: cover;
+  }
+   .div1{
+      width: 200px;
+      height: 200px;
+      background: white;
+      border: 10px solid hsla(0,0%,100%,.5);
+      /* 半透明效果会失效，需要加上下面这个属性， */
+      background-clip: padding-box;
+   }
+   .div2{
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    background: yellowgreen;
+    box-shadow: 0 0 0 10px #655,0 0 0 15px orange,0 2px 5px 15px rgba(0,0,0,.6);
+   }
+   .div3{
+      width: 200px;
+      height: 200px;
+      margin: 20px;
+      background: yellowgreen;
+      border: 10px solid #655;
+      outline: 5px dashed deeppink ;
+   }
+
+</style>
+
+<div id="div1"><p>fjdk</p></div>
+<div class="div2">用box-shadow实现多重边框</div>
+<div class="div3">用outline实现不同样式的两层边框</div>
+
+</body>
+
+<script type="text/javascript">
+window.onload=function(){ 
+function del_space(elem){
+
+    var nodes = elem.childNodes;//得到参数元素的所有子元素
+    return nodes.length!=0?nodes[0]:null;
+  }
+  var bo=document.getElementById("div1");
+  var s=del_space(bo);
+  console.log(s);
+} 
+  
+  </script>
+</html>

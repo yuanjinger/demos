@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul{
+      width: 100px;
+      border: 1px solid #000;
+      height: 100px;
+      overflow-y: scroll;
+      margin: 50px;
+    }
+    li{
+      list-style: none;
+    }
+    ul li.active{
+    background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <ul id="ul">
+    <li>11111</li>
+    <li>2222</li>
+    <li>33333</li>
+    <li>44444</li>
+    <li>5555</li>
+  </ul>
+
+  <script type="text/javascript">
+    var oUl=document.getElementById('ul');
+    var aLi=document.getElementsByTagName('li');
+    var shiftOnOff=false;
+    var ctrlOnOff=false;
+    var nowIndex=0;
+    var preIndex=0;
+    var preElement=null;
+    //阻止默认选中事件
+    oUl.addEventListener("mousedown",function (ev) {
+      ev.preventDefault();
+    });
+    document.onkeydown = function(ev){
+      if (ev.keyCode==16) { //shift
+        shiftOnOff=true;
+      }else if (ev.keyCode==17) {//ctrl
+        ctrlOnOff=true;
+      }
+    };
+    document.onkeyup = function(ev){
+      if (ev.keyCode==16) { //shift
+        shiftOnOff=false;
+      }else if (ev.keyCode==17) {//ctrl
+        ctrlOnOff=false;
+      }
+    };
+    for (var i = 0; i < aLi.length; i++) {
+      aLi[i].index=i;
+      aLi[i].onmousedown=function() {
+        nowIndex=this.index;
+        preElement=this;//当前按下元素
+        if (ctrlOnOff) {
+          if (this.className=='active') {
+            this.className='';
+          }else {
+            this.className='active';
+          }
+        }else if (shiftOnOff) {
+          var arr = shiftFn([],nowIndex,preIndex);
+          var bBtn=true;
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i].className!='active') {
+              bBtn=false;
+            }
+          }
+          if (bBtn) {
+            for (var i = 0; i < arr.length; i++) {
+              aLi[arr[i]].className='';
+            }
+          }else {
+            for (var i = 0; i < arr.length; i++) {
+              aLi[arr[i]].className='active';
+            }
+          }
+          this.className='active';
+        }else {
+          for (var i = 0; i < aLi.length; i++) {
+            aLi[i].className=null;
+          }
+          this.className='active';
+        }
+        preIndex=nowIndex;
+        //鼠标活动进行多选
+        document.onmousemove=function (ev) {
+          //获取滑动经过的元素
+          var element = document.elementFromPoint(ev.pageX,ev.pageY);
+          if(element!=preElement){
+            if (element.className=='active') {
+              preElement.className='';
+            }
+              element.className='active';
+          }
+          preElement = element;
+        };
+        document.onmouseup=function () {
+          document.onmousemove=null;
+          document.onmouseup=null;
+        };
+      }
+    };
+
+    function shiftFn(arr,num1,num2){
+      if (num1>num2) {
+        arr.push(num2);
+        shiftFn(arr,num1,++num2);
+      }else if (num1<num2) {
+        arr.push(num1);
+        shiftFn(arr,++num1,num2);
+      }else {
+        arr.push(num1);
+      }
+      return arr;
+    }
+  </script>
+</body>
+</html>

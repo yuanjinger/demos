@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    body{background: black;}
+    #canvas{
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1800" height="500">
+
+  </canvas>
+  <script type="text/javascript">
+    window.onload = function(){
+      var oC = document.getElementById("canvas");
+      var oGC = oC.getContext('2d');
+      var iNum =0;
+      var setArr = [];  //元素集合
+      setInterval(function(){
+        oGC.clearRect(0,0,oC.width,oC.height)//清除整个画布
+        //运动变化
+        for (var i = 0; i < setArr.length; i++) {
+          setArr[i].sY+=0.02;  //Y轴坐标增大，实现抛物线效果
+          setArr[i].x+=setArr[i].sX;
+          setArr[i].y+=setArr[i].sY;
+          if (setArr[i].y>=oC.height -setArr[i].r) {
+            setArr[i].y=oC.height-setArr[i].r;
+            setArr[i].sY*=-1;
+            setArr[i].sY*=0.9;
+            setArr[i].sX*=0.9;
+          }
+          if (Math.abs(setArr[i].sX)<=0.01) {
+            setArr.splice(i,1);
+          }
+        }
+        //循环绘制图形
+        for (var i = 0; i < setArr.length; i++) {
+          oGC.beginPath();
+          oGC.fillStyle='rgba('+setArr[i].red+','+setArr[i].green+','+setArr[i].blue+','+setArr[i].apha+')';
+          oGC.moveTo(setArr[i].x,setArr[i].y);
+          oGC.arc(setArr[i].x,setArr[i].y,setArr[i].r,0,360*Math.PI/180,false);
+          oGC.closePath();
+          oGC.fill();
+        }
+      },1000/60);
+      setInterval(function () {
+        var x = oC.width/2;
+        var y = oC.height-20;
+        var r =10;
+        var red=Math.floor(Math.random()*255);
+        var green =Math.floor(Math.random()*255);
+        var blue =Math.floor(Math.random()*255);
+        var apha=1;
+        var sX=Math.floor(Math.random()*5-2);
+        var sY=-3;
+        setArr.push({
+          x : x,  //x坐标
+          y : y,
+          r : r, //半径
+          red:red,
+          green: green,
+          blue:blue,
+          apha:apha,
+          sX:sX,  //速度x
+          sY: sY //速度y
+        });
+      },300)
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 原型链：实例对象与原型对象的连接，隐式连接_proto_,原型链最外层：Object.prototype -->
+  <script type="text/javascript">
+    // function Aaa(){
+    //   this.num=20;
+    // }
+    // Aaa.prototype.num=10;
+    // Object.prototype.num=30;
+    // var a1 = new Aaa();
+    // alert(a1.num);
+    function Aaa(){}
+    Aaa.prototype.name="xiaomgin";
+    var a1 =new Aaa();
+    alert(a1.constructor);
+
+  </script>
+
+</body>
+</html>

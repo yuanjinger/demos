@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    ul{
+      padding: 0;
+      margin:0;
+      list-style: none;
+    }
+    .tree-menu{
+      width: 360px;
+      height: 100%;
+      padding: 0px 12px;
+      border-right: 1px solid #e6e9f0;
+    }
+    .tree-menu-comm span{
+      display: block;
+      font-size: 12px;
+      position: relative;
+    }
+
+    .tree-contro .ico{
+      background-position: 3px -92px;
+    }
+    .tree-title .ico{
+     width:0;
+     height:0;
+     border-width:8px 0 10px 10px;
+     border-style:solid;
+     border-color:transparent transparent transparent #000;/*透明 透明 透明 黄*/
+     position:absolute;
+     top:5px;
+     left:-10px;
+    }
+    .tree-menu-comm span strong {
+      display: block;
+      width: 82%;
+      position: relative;
+      line-height: 22px;
+      padding: 2px 0;
+      padding-left: 5px;
+      color: #161719;
+      font-weight: normal;
+    }
+
+    .tree-nav {
+      background: #e7f2fe;
+      border: 1px solid #bfdaf4;
+      padding-left: 14px;
+      margin-left: 0px;
+    }
+
+    .tree-title {
+      border: 1px solid #fff;
+    }
+    .tree-contro-none .ico{
+      background-position: -999px -99px;
+    }
+    .tree-contro .ico{
+      background-position: 3px -92px;
+    }
+  </style>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <m-tree :data="treeList"></m-tree>
+    <!-- <div class="tree-menu-comm tree-menu">
+      <ul>
+        <li>
+          <div class="tree-title" style="padding-left:16px;"><span><strong>目录</strong><i class="ico"></i></span></div>
+          <ul>
+            <li>
+              <div class="tree-title" style="padding-left:32px;"><span><strong>我的音乐</strong><i class="ico"></i></span></div>
+              <ul>
+                <li>
+                  <div class="tree-title"style="padding-left:48px;">
+                    <span><strong>周杰伦</strong><i class="ico"></i></span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="tree-title tree-contro-none" style="padding-left:64px;">
+                        <span><strong>发如雪</strong><i class="ico"></i></span></div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="tree-title"style="padding-left:48px;">
+                    <span><strong>周杰伦</strong><i class="ico"></i></span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="tree-title tree-contro-none" style="padding-left:64px;">
+                        <span><strong>发如雪</strong><i class="ico"></i></span></div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                <div class="tree-title"style="padding-left:48px;">
+                    <span><strong>王杰</strong><i class="ico"></i></span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="tree-title tree-contro-none" style="padding-left:64px;">
+                        <span><strong>一场游戏一场梦</strong><i class="ico"></i></span></div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+  <script type="text/javascript">
+    Vue.component('m-tree-list',{
+      computed:{
+        count(){
+          console.log("1111111");
+          var c= this.increment;
+          return ++c;
+        },
+        stylePadding(){
+          console.log("2222222");
+          return {
+            'padding-left':this.count*16+'px'
+          }
+        }
+      },
+      props:{
+        data:{
+          type:Array,
+          default:[]
+        },
+        increment:{
+          type:Number,
+          default:0
+        }
+      },
+      template:`
+      <ul>
+        <li v-for="item of data">
+          <div class="tree-title" :style="[stylePadding]">
+            <span><strong>{{item.title}}</strong><i class="ico"></i></span>
+          </div>
+            <!--如果循环的item有children属性，那么生成下一级-->
+            <m-tree-list :increment="count" v-if='item.children' :data="item.children"></m-tree-list>
+        </li>
+      </ul>
+      `
+    })
+    Vue.component('m-tree',{
+      props:{
+        data:{
+          type:Array,
+          default:[]
+        }
+      },
+      template:`
+      <div class="tree-menu-comm tree-menu">
+        <m-tree-list :data=data></m-tree-list>
+      </div>
+      `
+    })
+    var data =[{
+      title:"目录",
+      children:[{
+        title:"我的音乐",
+        children:[{
+          title:"周杰伦",
+          children:[{
+            title:"发如雪"
+          }]
+        },{
+          title:"王杰",
+          children:[{
+            title:"一场游戏一场梦"
+          }]
+        }]
+      }]
+    }];
+    new Vue({
+      el:"#app",
+      data:{
+        treeList:data
+      }
+    })
+  </script>
+</body>
+</html>
